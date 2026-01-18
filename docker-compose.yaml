@@ -1,0 +1,11 @@
+services:
+  myapp:
+    image: girijavinchurkar/myrepo:myapp
+    container_name: spring-container
+    ports:
+      - "8081:8081"
+  nginx:
+    image: girijavinchurkar/myrepo:nginx
+    container_name: nginx
+    ports:
+      - "8086:80" 
