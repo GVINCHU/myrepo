@@ -1,4 +1,4 @@
-package com.example.docker_demo;
+package com.example.backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,7 +8,7 @@ public class DockerDemoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DockerDemoApplication.class, args);
-		System.out.println("Application is now up and running");
+		System.out.println("Application backend is now up and running");
 	}
 
 }
