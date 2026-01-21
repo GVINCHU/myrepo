@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Students Details</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f7f7f7;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        .list-container {
+            margin-top: 30px;
+            width: 700px;
+        }
+
+        li {
+            background: #fff;
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 5px;
+            list-style: none;
+            box-shadow: 0 0 8px rgba(0,0,0,0.1);
+        }
+
+        li strong {
+            font-size: 18px;
+        }
+
+        li div {
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>All Registered Students</h2>
+
+<div class="list-container">
+    <ul id="students"></ul>
+</div>
+
+<script>
+const API_URL = "http://localhost:8088/api/students"; // Backend API URL
+
+async function loadStudents() {
+    try {
+        const response = await fetch(API_URL);
+        const students = await response.json();
+
+        const list = document.getElementById("students");
+        list.innerHTML = "";
+
+        if (students.length === 0) {
+            list.innerHTML = "<li>No students found</li>";
+            return;
+        }
+
+        students.forEach(s => {
+            const li = document.createElement("li");
+            li.innerHTML = `
+                <strong>${s.name}</strong> (${s.rollNumber})<br>
+                <div><strong>Email:</strong> ${s.email} | <strong>Phone:</strong> ${s.phone}</div>
+                <div><strong>Gender:</strong> ${s.gender} | <strong>DOB:</strong> ${s.dob} | <strong>Age:</strong> ${s.age}</div>
+                <div><strong>Course:</strong> ${s.course} | <strong>Department:</strong> ${s.department} | <strong>Year:</strong> ${s.year}</div>
+                <div><strong>Address:</strong> ${s.address}</div>
+            `;
+            list.appendChild(li);
+        });
+    } catch (error) {
+        console.error("Error fetching students:", error);
+        document.getElementById("students").innerHTML = "<li>Error loading students</li>";
+    }
+}
+
+// Load students when page opens
+loadStudents();
+</script>
+
+</body>
+</html>
